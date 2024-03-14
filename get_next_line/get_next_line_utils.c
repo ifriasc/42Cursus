@@ -6,30 +6,32 @@
 /*   By: ifrias-c <ifrias-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:05:11 by ifrias-c          #+#    #+#             */
-/*   Updated: 2024/02/19 19:15:10 by ifrias-c         ###   ########.fr       */
+/*   Updated: 2024/03/14 13:02:19 by ifrias-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_strlen(const char *str)
 {
-	size_t	cnt;
+	int	cnt;
 
+	if (!str)
+		return (0);
 	cnt = 0;
 	while (str[cnt] != '\0')
 		cnt++;
 	return (cnt);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char *s, int c)
 {
 	int		cnt;
 
 	cnt = 0;
 	if (!s)
-		return (NULL);
-	while (s[cnt] != '\0')
+		return (0);
+	while (s[cnt])
 	{
 		if (s[cnt] == (char) c)
 			return ((char *)(&s[cnt]));
@@ -37,52 +39,33 @@ char	*ft_strchr(const char *s, int c)
 	}
 	if (s[cnt] == (char) c)
 		return ((char *)(&s[cnt]));
-	return (NULL);
+	return (0);
 }
 
-char	*ft_strdup(const char *s)
-{
-	char	*ss;
-	char	*smem;
-	int		i;
-
-	ss = (char *) s;
-	smem = (char *) malloc((ft_strlen(ss) + 1));
-	if (!smem)
-		return (NULL);
-	i = 0;
-	while (ss[i] != '\0')
-	{
-		smem[i] = ss[i];
-		i++;
-	}
-	smem[i] = '\0';
-	return (smem);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*res;
-	size_t	i;
-	size_t	j;
+	ssize_t	i;
+	ssize_t	j;
 
-	if (!s2)
-		return (0);
+	if (!s1)
+	{
+		s1 = (char *) malloc (sizeof(char)  + 1);
+		if (!s1)
+			return (NULL);
+		s1[0] = 0;
+	}
 	res = (char *) malloc (sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!res)
-		return (0);
-	i = 0;
-	while (s1[i] != '\0')
-	{
+		return (NULL);
+	i = -1;
+	while (s1[++i] != '\0')
 		res[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (s2[j] != '\0')
-	{
+	j = -1;
+	while (s2[++j])
 		res[i + j] = s2[j];
-		j++;
-	}
 	res[i + j] = '\0';
+	free(s1);
+	s1 = NULL;
 	return (res);
 }
