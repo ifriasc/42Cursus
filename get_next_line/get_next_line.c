@@ -6,7 +6,7 @@
 /*   By: ifrias-c <ifrias-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 12:47:24 by ifrias-c          #+#    #+#             */
-/*   Updated: 2024/03/14 13:00:27 by ifrias-c         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:45:02 by ifrias-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_build_line(char *partial)
 	char	*line;
 
 	i = 0;
-	while (partial[i] != '\0' && partial[i] != '\n')
+	while (partial[i] != '\n' && partial[i] != '\0')
 		i++;
 	line = (char *)malloc((i + 2) * sizeof(char));
 	if (!line)
@@ -66,25 +66,21 @@ char	*ft_build_line(char *partial)
 char	*ft_clean_line(char *partial)
 {
 	int		i;
-	int		j;
+	int		n;
 	char	*new_buff;
 
 	i = 0;
-	while (partial[i] != '\0' && partial[i] != '\n')
+	while (partial[i] != '\n' && partial[i] != '\0')
 		i++;
-	if (ft_strlen(partial) - i <= 0)
+	n = ft_strlen(partial) - (i + 1);
+	if (n <= 0)
 	{
 		free(partial);
 		partial = NULL;
 		return (NULL);
 	}
-	new_buff = (char *)malloc((ft_strlen(partial) - i + 1) * sizeof(char));
-	if (!new_buff)
-		return (NULL);
 	i++;
-	j = 0;
-	while (partial[i] != '\0')
-		new_buff[j++] = partial[i++];
+	new_buff = ft_strndup(partial + i, n);
 	free(partial);
 	partial = NULL;
 	return (new_buff);

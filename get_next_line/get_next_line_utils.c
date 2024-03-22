@@ -6,7 +6,7 @@
 /*   By: ifrias-c <ifrias-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:05:11 by ifrias-c          #+#    #+#             */
-/*   Updated: 2024/03/14 13:02:19 by ifrias-c         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:15:31 by ifrias-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ char	*ft_strchr(char *s, int c)
 
 	cnt = 0;
 	if (!s)
-		return (0);
+		return (NULL);
+	if (c == '\0')
+		return ((char *)(&s[ft_strlen(s)]));
 	while (s[cnt])
 	{
 		if (s[cnt] == (char) c)
 			return ((char *)(&s[cnt]));
 		cnt++;
 	}
-	if (s[cnt] == (char) c)
-		return ((char *)(&s[cnt]));
-	return (0);
+	return (NULL);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -67,5 +67,27 @@ char	*ft_strjoin(char *s1, char *s2)
 	res[i + j] = '\0';
 	free(s1);
 	s1 = NULL;
+	return (res);
+}
+
+char	*ft_strndup(char *s, int n)
+{
+	int		i;
+	char	*res;
+
+	res = malloc(sizeof(char) * (n + 1));
+	if (!res || !s)
+	{
+		free(res);
+		res = NULL;
+		return (NULL);
+	}
+	i = 0;
+	while (i < n && s[i])
+	{
+		res[i] = s[i];
+		i++;
+	}
+	res[i] = '\0';
 	return (res);
 }
