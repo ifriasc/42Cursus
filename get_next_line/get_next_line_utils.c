@@ -6,7 +6,7 @@
 /*   By: ifrias-c <ifrias-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 10:05:11 by ifrias-c          #+#    #+#             */
-/*   Updated: 2024/03/22 13:15:31 by ifrias-c         ###   ########.fr       */
+/*   Updated: 2024/03/22 14:06:33 by ifrias-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*ft_strjoin(char *s1, char *s2)
 
 	if (!s1)
 	{
-		s1 = (char *) malloc (sizeof(char)  + 1);
+		s1 = (char *) malloc (sizeof(char) + 1);
 		if (!s1)
 			return (NULL);
 		s1[0] = 0;
