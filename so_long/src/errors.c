@@ -10,3 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../includes/so_long.h"
+
+void    ft_error(char error)
+{
+    ft_printf("Error\n");
+    if(error == '1')
+		ft_printf("The map is not rectangle\n");
+    else if (error == '2')
+        ft_printf("The map is not closed\n");
+}
