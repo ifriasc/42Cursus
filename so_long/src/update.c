@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ifrias-c <ifrias-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/04 19:09:22 by ifrias-c          #+#    #+#             */
-/*   Updated: 2024/07/18 11:01:14 by ifrias-c         ###   ########.fr       */
+/*   Created: 2024/07/18 13:41:22 by ifrias-c          #+#    #+#             */
+/*   Updated: 2024/07/18 13:47:10 by ifrias-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	ft_error(char *error, t_data *data)
+void	ft_update_data(t_data *data, int new_x, int new_y)
 {
-	ft_printf("Error\n");
-	ft_printf("%s", error);
-	if (data->texture)
-		mlx_delete_texture(data->texture);
-    if (data->img)
-		mlx_delete_image(data->mlx, data->img);
-	if (data->mlx)
-		mlx_terminate(data->mlx);
-	exit(EXIT_FAILURE);
+	if (data->map[new_x][new_y] == 'C')
+	{
+		data->picked++;
+	}
+
+	if (data->map[new_x][new_y] == 'E')
+	{
+		if (data->picked == data->coins)
+			ft_printf("YOU WIN!!");
+	}
+
+	data->moves++;
 }
